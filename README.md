@@ -73,3 +73,15 @@ def main():
 
     driver.get("https://mega.nz/start")
 ```
+
+## All the code above is a template I use to start a project. I usually copy and paste it to save time.
+- After this is done, we can begin automating the creation of Mega.nz accounts.
+
+#### If you run the code you should get this
+
+![1](https://user-images.githubusercontent.com/121656708/210117754-191fe745-5b8c-4c33-9bd6-0ff805674b3b.png)
+
+
+
+
+
