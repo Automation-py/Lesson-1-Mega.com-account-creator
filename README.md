@@ -14,10 +14,11 @@
  
  - We will begin by using a template that I use when i have a Selenium project.
  
- #### We start by importing the package that we will use.
+ #### We start by importing the packages that we will use.
  
  ```
 import random
+import names
 import selenium 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -28,5 +29,47 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from selenium.webdriver.chrome.service import Service
  ```
+ 
+ #### Then, we create two functions for generating random email and passwords using the package random.
+ 
+ ```
+ def random_email():
+    loademail = ''.join(
+        random.choice("1234567890") for x in range(8)) #range(8)) sets the length to 8 random characters
+    return loademail
 
 
+def random_pass():
+    loadpassword = ''.join(
+        random.choice("1234567890") for x in range(8)) #range(8)) sets the length to 8 random characters
+    return loadpassword
+ ```
+#### Third, we create a main function and place the Selenium code within it.
+#### this part of the code will open chromedriver to Mega.nz, make sure [Chromedriver](https://chromedriver.chromium.org/downloads) is placed in the same path
+
+```
+Headless = False
+
+def main():
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    prefs = {"profile.default_content_setting_values.notifications": 2}
+    chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument("--log-level=3")
+    os.environ['WDM_LOG_LEVEL'] = '0'
+    chrome_options.add_argument(
+        'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36')
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    chrome_options.add_argument('--profile-directory=Default')
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+    chrome_options.add_argument("window-size=500,500") #sets the chrome window size 
+
+    if Headless == True:
+        chrome_options.add_argument('headless')
+    else:
+        pass
+
+    driver = webdriver.Chrome(options=chrome_options)
+
+    driver.get("https://mega.nz/start")
+```
