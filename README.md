@@ -16,7 +16,7 @@
  
  #### We start by importing the packages that we will use.
  
- ```
+ ```py
 import random
 import names
 import selenium 
@@ -30,9 +30,18 @@ from selenium.common.exceptions import NoSuchElementException, StaleElementRefer
 from selenium.webdriver.chrome.service import Service
  ```
  
+ ## Installing pakages
+
+To run this project secuessfully, install these pakages 
+
+```bash
+  pip install Selenium
+  pip install names
+```
+ 
  #### Then, we create two functions for generating random email and passwords using the package random.
  
- ```
+ ```py
  def random_email():
     loademail = ''.join(
         random.choice("1234567890") for x in range(8)) #range(8)) sets the length to 8 random characters
@@ -47,7 +56,7 @@ def random_pass():
 #### Third, we create a main function and place the Selenium code within it.
 #### this part of the code will open chromedriver to Mega.nz, make sure [Chromedriver](https://chromedriver.chromium.org/downloads) is placed in the same path
 
-```
+```py
 Headless = False
 
 def main():
@@ -80,6 +89,9 @@ def main():
 #### If you run the code you should get this
 
 ![1](https://user-images.githubusercontent.com/121656708/210117754-191fe745-5b8c-4c33-9bd6-0ff805674b3b.png)
+
+
+## In the next step, we will use the NAMES package to complete our random email and password functions. 
 
 
 
