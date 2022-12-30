@@ -1,6 +1,6 @@
 # Lesson 1 Mega.nz Account Creator
 
-We will be creating a [Mega.nz](urlhttps://mega.nz/start) account creator using Selenium package and Request package we will go more in depth with the Request package in later lessons, **The idea of the first lesson is to give you some understading of how automation works and functions**
+**In this lesson, we will create a Mega.nz account creator using Selenium and the Request package. We will go more in depth with the Request package in later lessons. The first lesson is designed to give you some understanding of how automation works and functions.**
 
 
 ## Acknowledgement Before We start Make Sure You Know The Basics Before Continuing
@@ -12,9 +12,9 @@ We will be creating a [Mega.nz](urlhttps://mega.nz/start) account creator using 
  
  #
  
- - Alright we will start with a template i alwyes use when i start a Selenium project
+ - We will begin by using a template that I use when i have a Selenium project.
  
- #### First off we start by importing pakage that we will use. 
+ #### We start by importing the package that we will use.
  
  ```
 import random
