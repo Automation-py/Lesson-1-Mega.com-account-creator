@@ -441,8 +441,9 @@ def main():
 
     driver.get("https://mega.nz/start")
     
-
 ```
 
-
+## The next section will be where we will be grabbing the Xpath of elements in Chrome and clicking or sending text to them.
+- I will skip this step and paste the code, since you may already know how to do this step. If not, I suggest you watch this YT playlist. 
+[Learn The Basics Of Selenium Here](https://www.youtube.com/watch?v=Xjv1sY630Uc&list=PLzMcBGfZo4-n40rB1XaJ0ak1bemvlqumQ) 
 
