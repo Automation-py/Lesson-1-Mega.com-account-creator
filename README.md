@@ -443,7 +443,7 @@ def main():
     
 ```
 
-## The next section will be where we will be grabbing the Xpath of elements in Chrome and clicking or sending text to them.
+## The next section will be grabbing the Xpath of elements in Chrome and clicking or sending text to them.
 - I will skip this step and paste the code, since you may already know how to do this step. If not, I suggest you watch this YT playlist. 
 [Learn The Basics Of Selenium Here](https://www.youtube.com/watch?v=Xjv1sY630Uc&list=PLzMcBGfZo4-n40rB1XaJ0ak1bemvlqumQ) 
 
@@ -480,7 +480,7 @@ driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/for
 
 ```
 
-## Your Project SHould look Like This:
+## Your Project Should look Like This:
 
 ```py
 import random
@@ -678,7 +678,7 @@ def FetchEmail(xitroo_email=None, subject=None, timeout=30):
 email_content = FetchEmail(xitroo_email=email, subject="MEGA")
 ```
 
-## Your Project SHould look Like This:
+## Your Project Should look Like This:
 
 ```py
 import random
@@ -925,7 +925,7 @@ except:
        pass
 ```
 
-## Your Project SHould look Like This:
+## Your Project Should look Like This:
 
 ```py
 import random
