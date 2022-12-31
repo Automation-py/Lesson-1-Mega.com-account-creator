@@ -843,6 +843,14 @@ def main():
     
 ```
 
+## FetchEmail Function explanation:
 
+#### How does it grab the verification link?
+
+it sends requests to the Xitroo.com servers and checks if the random email we created recived any emails, and if it has then it checks each email for a subject containing MEGA as we told the function to look for MEGA.
+
+#### After it finds the email what does it do?
+
+It sends another request to grab the message body of that email , where we can then see the content of the email and get the verification link.
 
 
