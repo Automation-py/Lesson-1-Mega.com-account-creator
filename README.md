@@ -1137,7 +1137,7 @@ def main():
           pass
 ```
 
-#### If the account wass successfully made it will save it in a txt document in the same path as the program 
+#### If the account was made it will save it in a txt document in the same path as the program 
 
 
 ## Final Thoughts
@@ -1147,6 +1147,10 @@ I might be using a battle.net gen or a discord gen next lesson, that would be in
 Im so exited to see your guys feedback on this lesson and what i can improve on, to give you guys the best automation information out there 
 
 ## This is not a must but, If you appreciate my hard work please Donate 💰
+
+![RibbonDonateBitcoin](https://user-images.githubusercontent.com/121656708/210123913-36c96bc4-06ed-4808-9b50-50c7183efeb1.png)
+
 BTC: 32qQwjQ18FF2GntAP8iPhkQ4UoMkgbTN4F
+
 
 
