@@ -81,7 +81,7 @@ def main():
 
     driver = webdriver.Chrome(options=chrome_options)
 
-    driver.get("https://mega.nz/start")
+    driver.get("https://mega.nz/register")
 ```
 
 ## All the code above is a template I use to start a project. I usually copy and paste it to save time.
@@ -144,7 +144,7 @@ def main():
 
     driver = webdriver.Chrome(options=chrome_options)
 
-    driver.get("https://mega.nz/start")
+    driver.get("https://mega.nz/register")
 ```
 
 ## Since Mega.nz requires you to email verify your email address, we will use a temporary email service called Xitroo.
@@ -439,11 +439,244 @@ def main():
 
     driver = webdriver.Chrome(options=chrome_options)
 
-    driver.get("https://mega.nz/start")
+    driver.get("https://mega.nz/register")
     
 ```
 
 ## The next section will be where we will be grabbing the Xpath of elements in Chrome and clicking or sending text to them.
 - I will skip this step and paste the code, since you may already know how to do this step. If not, I suggest you watch this YT playlist. 
 [Learn The Basics Of Selenium Here](https://www.youtube.com/watch?v=Xjv1sY630Uc&list=PLzMcBGfZo4-n40rB1XaJ0ak1bemvlqumQ) 
+
+
+```py
+while __name__ == '__main__': #checks if the button is clickable on chrome tab
+    try:
+        r = driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[2]/input").is_displayed()
+        if r == True:
+                 break
+        else:
+            pass
+        
+
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[2]/input").send_keys(first_name) #sends first name in text box in chrome
+
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[3]/input").send_keys(last_name) #sends last name in text box in chrome
+
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[5]/input").send_keys(email) #sends email in text box in chrome
+
+driver.find_element(By.ID, "register-password-registerpage2").click() #clicks on the password box 1
+
+driver.find_element(By.ID, "register-password-registerpage2").send_keys(password) #sends password in text box in chrome
+
+driver.find_element(By.ID, "register-password-registerpage3").click() #clicks on the password box 2
+
+driver.find_element(By.ID, "register-password-registerpage3").send_keys(password) #sends password-2 in text box in chrome
+
+driver.find_element(By.XPATH,"/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[8]/div[1]/input").click() #element clicks
+
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[9]/div[1]/input").click() #element clicks
+
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/button").click() #element clicks
+
+```
+
+## Your Project SHould look Like This:
+
+```py
+import random
+import names
+import selenium 
+import os
+import base64
+from termcolor import colored
+import colorama
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions as EC, expected_conditions
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from selenium.webdriver.chrome.service import Service
+
+
+
+def random_email():
+    loademail = ''.join(
+        random.choice("1234567890") for x in range(8)) #range(8)) sets the length to 8 random characters
+    return loademail
+
+
+def random_pass():
+    loadpassword = ''.join(
+        random.choice("1234567890") for x in range(8)) #range(8)) sets the length to 8 random characters
+    return loadpassword
+    
+    
+def FetchEmail(xitroo_email=None, subject=None, timeout=30):
+    cwd = os.getcwd()
+    if xitroo_email == None:
+        print(f"""
+        {Fore.RED}
+Traceback (an error has occurred):
+   File "{cwd}"
+     Error = get_email(xitroo_email=?)
+TypeError: get_email(xitroo_email=?), Missing positional argument, xitroo_email= should have the value of the generated email. """)
+        input()
+    else:
+        pass
+
+    if subject == None:
+            print(f"""
+            {Fore.RED}
+Traceback (an error has occurred):
+   File "{cwd}"
+     Error = get_email(subject=?)
+TypeError: get_email(subject=?), Missing positional argument, subject= should have the value of the email subject received. """)
+            input()
+    else:
+        pass
+
+    xitroo_session = requests.session()
+
+    counter = 0
+
+    while True:
+        counter += 1
+        now = datetime.datetime.now()
+        b = now + datetime.timedelta(0, 600)
+        timestamp = datetime.datetime.timestamp(b)
+
+        xitroo_response = xitroo_session.get(
+            "https://api.xitroo.com/v1/mails?locale=en&mailAddress=" + xitroo_email + "&mailsPerPage=25&minTimestamp=0&maxTimestamp=" + str(
+                timestamp))
+
+        if str(subject) in xitroo_response.text:
+            break
+
+        time.sleep(1)
+
+        if counter == timeout:
+            return print(Fore.RED + "Email timeout limit has reached")
+        else:
+            pass
+
+    email_id = re.findall('_id":"(.*?)"', xitroo_response.text)[0]
+
+
+    data = {
+        'id': email_id
+    }
+
+    email_body = xitroo_session.get("https://api.xitroo.com/v1/mail?locale=en&id={}".format(email_id), data=data)
+    bodytext = re.findall('"bodyText":"(.*?)"', email_body.text)[0]
+    code = base64.b64decode(bodytext)
+    conv_email_base64 = base64.b64encode(code)
+    body = base64.b64decode(conv_email_base64).decode()
+    return body    
+    
+    
+    
+    
+
+def main():
+
+    first_name = names.get_first_name(gender='male')  #Random first name, example john
+
+    last_name = names.get_last_name() #Random last name, example doe
+
+    email = first_name + last_name + random_email() + "@xitroo.com"  #combines first and last names together plus adds email domain @xitroo.com, johndoe@xitroo.com
+
+    password = first_name + last_name + random_pass() #combines first and last names together plus adds random numbers to generate password
+
+
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    prefs = {"profile.default_content_setting_values.notifications": 2}
+    chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument("--log-level=3")
+    os.environ['WDM_LOG_LEVEL'] = '0'
+    chrome_options.add_argument(
+        'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36')
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+    chrome_options.add_argument('--profile-directory=Default')
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+    chrome_options.add_argument("window-size=500,500") #sets the chrome window size 
+
+    if Headless == True:
+        chrome_options.add_argument('headless')
+    else:
+        pass
+
+    driver = webdriver.Chrome(options=chrome_options)
+
+    driver.get("https://mega.nz/register")
+    
+    while __name__ == '__main__': #checks if the button is clickable on chrome tab
+    try:
+        r = driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[2]/input").is_displayed()
+        if r == True:
+                 break
+        else:
+            pass
+        
+
+    driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[2]/input").send_keys(first_name) #sends first name in text box in chrome
+
+    driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[3]/input").send_keys(last_name) #sends last name in text box in chrome
+
+    driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[5]/input").send_keys(email) #sends email in text box in chrome
+
+    driver.find_element(By.ID, "register-password-registerpage2").click() #clicks on the password box 1
+
+    driver.find_element(By.ID, "register-password-registerpage2").send_keys(password) #sends password in text box in chrome
+
+    driver.find_element(By.ID, "register-password-registerpage3").click() #clicks on the password box 2
+
+    driver.find_element(By.ID, "register-password-registerpage3").send_keys(password) #sends password-2 in text box in chrome
+
+    driver.find_element(By.XPATH,"/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[8]/div[1]/input").click() #element clicks
+
+    driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/div[9]/div[1]/input").click() #element clicks
+
+    driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/div[2]/div[1]/form/button").click() #element clicks
+    
+```
+
+#### If you run the code you should get this
+
+https://user-images.githubusercontent.com/121656708/210121874-40f4bedf-c37d-4758-973b-c69247b3bf38.mp4
+
+
+## Alright here comes the cool part, Email Verification
+For the purpose of this lesson i tweaked some stuff, in my original source i had the email verification fully request based.
+The changes i made are miner but i wanted to make this lesson toward Selenium fully we are still gonna use the XITROO API i made to grab 
+the Verification link but we will verfiy it using webdriver rather than request just to simplify things.
+
+## Okay a quick re-cap 
+- We will be using this follwing code to get the verification link from the email.
+
+1 - The Random Email We Created With a Xitroo.com Domain
+```py
+email = first_name + last_name + random_email() + "@xitroo.com"
+```
+
+2 - The Xitroo API function
+```py
+def FetchEmail(xitroo_email=None, subject=None, timeout=30):
+```
+
+## Let's Get Started:
+- We will call the function as the code shows below
+- The xitroo_email= will take the value email
+- The subject= will take part of the email subject you recived, example below
+
+![Email ](https://user-images.githubusercontent.com/121656708/210122307-25c01b63-5e6f-4f44-b901-a9a9158f49b5.png)
+
+
+```py
+email_content = FetchEmail(xitroo_email=email, subject="MEGA")
+```
+
+
 
