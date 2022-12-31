@@ -853,4 +853,48 @@ it sends requests to the Xitroo.com servers and checks if the random email we cr
 
 It sends another request to grab the message body of that email , where we can then see the content of the email and get the verification link.
 
+#### How does the email body look like?
+
+will when the function finds the email and sends the 2end request to grab the content it has to decode it from HEX to UFT-8 so we can read it, here is an example 
+of how it looks decoded 
+
+```
+johndoe@xitroo.com
+
+You have one more step remaining to activate your MEGA account.
+
+
+Click on the link below to verify your email address:
+
+https://mega.nz/#confirmQ29uZmlybUNvZGVWMt4Sgs26BgAGUOn6yHsHwUxhd3JlbmNlS2luZ18wMjM0QHhpdHJvby5jb20JTGF3cmVuY2UgS2luZ1lq3S3CeDT3
+
+Best regards,
+
+— Team MEGA
+```
+
+## seperating the verification link from the rest of the body content 
+- we have to use a package called re which is a short name for regex here is how we do that.
+
+Make sure to (import) re at the very top of the code
+
+```py
+url = re.findall('https://(.*?)\n', email_content)[0] #grabs url from email to seperate it
+
+confirmation_url = "https://" + url #adds https:// to url to auth
+```
+
+#### Then we call driver.get() to open the verification link to verify the account 
+
+```py
+email_content = FetchEmail(xitroo_email=email, subject="MEGA") # function gets auth url from email
+
+url = re.findall('https://(.*?)\n', email_content)[0] #grabs url from email to seperate it
+
+confirmation_url = "https://" + url #adds https:// to url to auth
+
+driver.get(confirmation_url) #opens the auth link
+```
+
+
 
