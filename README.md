@@ -232,5 +232,13 @@ email_content = FetchEmail(xitroo_email=email, subject="MEGA")
 
 ```
 
+## If you are interested in this API, I have made it into a Python library you can install it by following these steps:
+- Go to start>Search>Type CMD>Open As Admin> copy paste the following.
+
+```
+pip install xitroo-api
+```
+- Documentacion can be found [Here](https://pypi.org/project/xitroo-api/)
+
 
 
