@@ -1152,5 +1152,9 @@ Im so exited to see your guys feedback on this lesson and what i can improve on,
 
 BTC: 32qQwjQ18FF2GntAP8iPhkQ4UoMkgbTN4F
 
+## Contact me:
+- Discord: Flex#8941
+- Email: themythflex@gmail.com
+
 
 
