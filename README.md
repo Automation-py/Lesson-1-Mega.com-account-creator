@@ -38,6 +38,8 @@ To run this project successfully, you need to install these packages.
 ```bash
   pip install Selenium
   pip install names
+  pip install base64
+  pip install requests
 ```
  
  #### Then, we create two functions for generating random email and passwords using the package random.
